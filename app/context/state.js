@@ -7,7 +7,6 @@ const AppContext = createContext();
 export function AppWrapper({ children }) {
 
   // ui states
-  const [isLoading, setIsLoading] = useState(true);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isSound, setIsSound] = useState(false);
   const [apiData, setApiData] = useState(null);
@@ -15,11 +14,6 @@ export function AppWrapper({ children }) {
   const [showContentSlider, setShowContentSlider] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
   const [visitedPagesCounter, setVisitedPagesCounter] = useState(0);
-
-  // loading screen
-  const toggleLoading = () => {
-    setIsLoading((prevIsLoading) => !prevIsLoading);
-  };
 
   // opens nav
   const toggleNav = () => {
@@ -46,15 +40,6 @@ export function AppWrapper({ children }) {
     
   };
 
-  // handle loading screen
-  useEffect(() => {
-    const loadingTimeout = setTimeout(() => {
-      toggleLoading();
-    }, 100);
-
-    return () => clearTimeout(loadingTimeout);
-  }, []);
-
   // setting the slider behaviour
   useEffect(() => {
     if (visitedPagesCounter === 1) {
@@ -75,7 +60,7 @@ export function AppWrapper({ children }) {
         if (response.ok) {
           const data = await response.json();
           setApiData(data);
-          console.log('Data is ready!')
+          // console.log('Data is ready!')
         } else {
           console.error('API request failed:', response.status);
         }
@@ -88,7 +73,6 @@ export function AppWrapper({ children }) {
 
   // state values
   let sharedState = {
-    isLoading,
     apiData,
     isNavOpen,
     toggleNav,

@@ -1,10 +1,24 @@
 'use client'
 
-import { useAppContext } from '../context/state';
+import { useState, useEffect } from "react";
 
 export default function LoadingCurtain() {
 
-  const { isLoading } = useAppContext();
+  const [isLoading, setIsLoading] = useState(true);
+
+  const toggleLoading = () => {
+    setIsLoading((prevIsLoading) => !prevIsLoading);
+  };
+
+  // handle loading screen
+  useEffect(() => {
+    const loadingTimeout = setTimeout(() => {
+      toggleLoading();
+    }, 100);
+
+    return () => clearTimeout(loadingTimeout);
+  }, []);
+
   // console.log(isLoading);
 
   return (

@@ -29,7 +29,7 @@ export default function ContentSlider() {
       // default case
       default:
         return (
-          <div className='hidden bg-red-500 md:block'>Closing...</div>
+          <div className='hidden md:block'>Closing...</div>
         );
     }
   };
@@ -46,7 +46,7 @@ export default function ContentSlider() {
   }, [targetPage, visitedPagesCounter]);
 
   return (
-    <div className={`fixed top-[50px] bottom-0 left-[120%] w-full p-[40px] text-2xl bg-dark-grey z-[40] transition-left ${visitedPagesCounter === 1 && 'delay-300'} duration-600 ${showContentSlider && '!left-0 md:!left-[10%]'} md:top-0 md:w-[90%]`}>
+    <div className={`fixed top-[50px] bottom-0 left-[120%] w-full overflow-x-hidden overflow-y-auto text-2xl bg-dark-grey z-[40] transition-left ${visitedPagesCounter === 1 && 'delay-300'} duration-600 ${showContentSlider && '!left-0 md:!left-[10%]'} md:top-0 md:w-[90%] hide-scrollbar`}>
       {delayedContent}
     </div>
   );

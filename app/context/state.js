@@ -6,7 +6,9 @@ const AppContext = createContext();
 
 export function AppWrapper({ children }) {
 
+
   // ui states
+  const [isLoading, setIsLoading] = useState(true);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isSound, setIsSound] = useState(false);
   const [apiData, setApiData] = useState(null);
@@ -14,6 +16,13 @@ export function AppWrapper({ children }) {
   const [showContentSlider, setShowContentSlider] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
   const [visitedPagesCounter, setVisitedPagesCounter] = useState(0);
+  const [portfolioData, setPortfolioData] = useState('All');
+
+  
+  // handle initial site loader (curtain style)
+  const toggleLoading = () => {
+    setIsLoading((prevIsLoading) => !prevIsLoading);
+  };
 
   // opens nav
   const toggleNav = () => {
@@ -37,7 +46,6 @@ export function AppWrapper({ children }) {
         return pageName === 'HOME' ? 0 : prevCounter + 1;
       }
     });
-    
   };
 
   // setting the slider behaviour
@@ -52,7 +60,7 @@ export function AppWrapper({ children }) {
     }
   }, [visitedPagesCounter]);
 
-  // api call
+  // api call for data
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -71,9 +79,17 @@ export function AppWrapper({ children }) {
     fetchData();
   }, []);
 
+  // handle active portfolio data
+  const handlePortfolio = (data) => {
+    setPortfolioData(data);
+  }
+
+
   // state values
   let sharedState = {
     apiData,
+    isLoading,
+    toggleLoading,
     isNavOpen,
     toggleNav,
     isSound,
@@ -83,6 +99,8 @@ export function AppWrapper({ children }) {
     showContentSlider,
     activeSection,
     visitedPagesCounter,
+    portfolioData,
+    handlePortfolio
   }
   
 

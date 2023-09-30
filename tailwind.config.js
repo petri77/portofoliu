@@ -10,6 +10,7 @@ module.exports = {
       colors: {
         "dark-grey": "#0e0f10",
         "green": "#25ca7f",
+        "black-box": "#070708",
       },
       transitionDuration: {
         '600': '600ms',

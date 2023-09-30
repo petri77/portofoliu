@@ -16,7 +16,7 @@ export default function Heading() {
 
   return (
     <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center gap-[15px] cursor-default">
-      <h1 className="font-semibold leading-none text-[40px] sm:text-[50px] md:text-[60px] lg:text-[70px] drop-shadow-lg">
+      <h1 className="font-semibold leading-none text-[40px] sm:text-[50px] md:text-[60px] lg:text-[64px] xl:text-[70px] drop-shadow-lg">
         Petri<span className="text-green">77</span>
       </h1>
       {/* flipping words */}

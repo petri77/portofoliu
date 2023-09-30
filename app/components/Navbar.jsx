@@ -1,8 +1,8 @@
 'use client'
 
-import { useAppContext } from '../context/state';
-import SoundBox from './SoundBox';
-import Image from 'next/image';
+import { useAppContext }        from '../context/state';
+import SoundBox                 from './SoundBox';
+import Image                    from 'next/image';
 import { FaHouseDamage, FaUserTie, FaAddressBook, FaBriefcase, FaReceipt, FaEnvelope } from 'react-icons/fa';
 
 export default function Navbar() {

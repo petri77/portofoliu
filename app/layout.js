@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
 
 
   return (
-    <html lang="en">
+    <html lang="en" className='scroll-smooth'>
       <body className={poppins.className}>
         <AppWrapper>
           <LoadingCurtain />

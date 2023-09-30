@@ -1,14 +1,11 @@
 'use client'
 
-import { useState, useEffect } from "react";
+import { useAppContext }        from '../context/state';
+import { useEffect }            from "react";
 
 export default function LoadingCurtain() {
 
-  const [isLoading, setIsLoading] = useState(true);
-
-  const toggleLoading = () => {
-    setIsLoading((prevIsLoading) => !prevIsLoading);
-  };
+  const { isLoading, toggleLoading } = useAppContext();
   
   // handle loading screen
   useEffect(() => {
@@ -19,8 +16,7 @@ export default function LoadingCurtain() {
     return () => clearTimeout(loadingTimeout);
   }, []);
   
-  // console.log(isLoading);
-
+  
   return (
     <div className="fixed inset-0 z-[1000] flex justify-center items-center pointer-events-none">
       <div className={`bg-dark-grey h-full w-1/2 absolute left-0 transition-all duration-700 ease-in-out delay-1000 ${!isLoading && 'left-[-50%]'}`}></div>

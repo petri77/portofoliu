@@ -1,4 +1,5 @@
 import { useAppContext }        from '@/app/context/state';
+import { useEffect, useRef }    from 'react';
 import Image                    from 'next/image';
 import { FaMapMarkedAlt, FaAward, FaCertificate, FaUserAstronaut, FaMusic, FaRoute, FaImage, FaFilm, FaSpaceShuttle, FaBook, FaChessKnight, FaTree, FaDesktop, FaCogs, FaMobileAlt, FaMedkit, FaRegStar, FaRegStarHalf, FaUser, FaBriefcase, FaGlobe } from 'react-icons/fa';
 
@@ -6,6 +7,35 @@ import { FaMapMarkedAlt, FaAward, FaCertificate, FaUserAstronaut, FaMusic, FaRou
 export default function About() {
 
   const { apiData } = useAppContext();
+  const testimonialsRef = useRef(null);
+
+  useEffect(() => {
+
+    const sliderContainer = testimonialsRef.current;
+    // Calculate the width of each testimonial item
+    const testimonialWidth = sliderContainer.querySelector('.testimonial').offsetWidth + 30;
+    // Calculate the number of testimonials to scroll
+    const numTestimonialsToScroll = 1;
+    // Calculate the distance to scroll
+    const scrollDistance = numTestimonialsToScroll * testimonialWidth;
+    // Set the interval to scroll every X milliseconds
+    const scrollInterval = setInterval(() => {
+      if (sliderContainer.scrollLeft + sliderContainer.clientWidth >= sliderContainer.scrollWidth) {
+        // If at the end, scroll back to the beginning
+        sliderContainer.classList.remove('scroll-smooth');
+        sliderContainer.scrollLeft = 0;
+      } else {
+        // Scroll to the right by the specified distance
+        sliderContainer.classList.add('scroll-smooth');
+        sliderContainer.scrollLeft += scrollDistance;
+      }
+    }, 8000); // Adjust the interval time as needed
+    
+    // Clear the interval when the component unmounts
+    return () => {
+      clearInterval(scrollInterval);
+    };
+  }, []);
 
   return (
     <section className="page-container text-center w-full mt-[70px] mx-auto mb-[140px]">
@@ -22,8 +52,8 @@ export default function About() {
         {/* profile */}
         <div className='bg-black-box p-[30px] rounded-[10px] mx-[15px] hover-animated'>
           <div className='md:flex md:gap-[30px]'>
-            <div className="w-1/2 mx-auto rounded-full overflow-hidden mb-[30px] md:m-0 md:min-w-[185px] lg:min-w-[calc(25%-20px)]">
-              <Image src={"/images/pages/petri.png"} alt='Petri' width={400} height={400} />
+            <div className="w-1/2 mx-auto rounded-full overflow-hidden mb-[30px] self-start md:m-0 md:min-w-[185px] lg:min-w-[calc(25%-20px)]">
+              <Image src={"/images/pages/petri.webp"} alt='Petri' width={400} height={400} />
             </div>
             <div className="flex flex-col gap-[15px] text-left">
               <h4>Moldovan Petri</h4>
@@ -147,9 +177,9 @@ export default function About() {
             <h3>Testimonials</h3>
           </div>
           {/* testimonials slider */}
-          <div className='flex w-full gap-[15px] px-[15px] h-full overflow-y-hidden overflow-x-scroll snap-mandatory snap-x hide-scrollbar lg:gap-[30px]'>
+          <div ref={testimonialsRef} className='flex w-full gap-[15px] px-[15px] h-full overflow-y-hidden overflow-x-scroll snap-mandatory snap-x scroll-smooth hide-scrollbar lg:gap-[30px]'>
             {/* 1 */}
-            <div className="bg-black-box min-w-full p-[30px] rounded-[10px] snap-center lg:min-w-[calc(50%-15px)] lg:snap-align-none">
+            <div className="testimonial bg-black-box min-w-full p-[30px] rounded-[10px] snap-center lg:min-w-[calc(50%-15px)] lg:snap-align-none">
               <div className="flex flex-col gap-[30px] sm:flex-row">
                 <div className='flex items-center text-left gap-[20px] flex-1'>
                   <div className="flex rounded-full overflow-hidden">
@@ -171,7 +201,7 @@ export default function About() {
               <p className='mt-[30px] text-[14px] leading-[24px] text-left'>Curabitur eleifend tempor gnceleris eget placeratvel phasellus eget sem just metup consequat gestas facilisis eleifend posure tempor metus sem just metup consequat gestas facilisis eleifend posures temporureture.</p>
             </div>
             {/* 2 */}
-            <div className="bg-black-box min-w-full p-[30px] rounded-[10px] snap-center lg:min-w-[calc(50%-15px)] lg:snap-align-none">
+            <div className="testimonial bg-black-box min-w-full p-[30px] rounded-[10px] snap-center lg:min-w-[calc(50%-15px)] lg:snap-align-none">
               <div className="flex flex-col gap-[30px] sm:flex-row">
                 <div className='flex items-center text-left gap-[20px] flex-1'>
                   <div className="flex rounded-full overflow-hidden">
@@ -193,7 +223,7 @@ export default function About() {
               <p className='mt-[30px] text-[14px] leading-[24px] text-left'>Curabitur eleifend tempor gnceleris eget placeratvel phasellus eget sem just metup consequat gestas facilisis eleifend posure tempor metus sem just metup consequat gestas facilisis eleifend posures temporureture.</p>
             </div>
             {/* 3 */}
-            <div className="bg-black-box min-w-full p-[30px] rounded-[10px] snap-center lg:min-w-[calc(50%-15px)] lg:snap-align-none">
+            <div className="testimonial bg-black-box min-w-full p-[30px] rounded-[10px] snap-center lg:min-w-[calc(50%-15px)] lg:snap-align-none">
               <div className="flex flex-col gap-[30px] sm:flex-row">
                 <div className='flex items-center text-left gap-[20px] flex-1'>
                   <div className="flex rounded-full overflow-hidden">
@@ -215,7 +245,7 @@ export default function About() {
               <p className='mt-[30px] text-[14px] leading-[24px] text-left'>Curabitur eleifend tempor gnceleris eget placeratvel phasellus eget sem just metup consequat gestas facilisis eleifend posure tempor metus sem just metup consequat gestas facilisis eleifend posures temporureture.</p>
             </div>
             {/* 4 */}
-            <div className="bg-black-box min-w-full p-[30px] rounded-[10px] snap-center lg:min-w-[calc(50%-15px)] lg:snap-align-none">
+            <div className="testimonial bg-black-box min-w-full p-[30px] rounded-[10px] snap-center lg:min-w-[calc(50%-15px)] lg:snap-align-none">
               <div className="flex flex-col gap-[30px] sm:flex-row">
                 <div className='flex items-center text-left gap-[20px] flex-1'>
                   <div className="flex rounded-full overflow-hidden">
@@ -237,7 +267,7 @@ export default function About() {
               <p className='mt-[30px] text-[14px] leading-[24px] text-left'>Curabitur eleifend tempor gnceleris eget placeratvel phasellus eget sem just metup consequat gestas facilisis eleifend posure tempor metus sem just metup consequat gestas facilisis eleifend posures temporureture.</p>
             </div>
             {/* 5 */}
-            <div className="bg-black-box min-w-full p-[30px] rounded-[10px] snap-center lg:min-w-[calc(50%-15px)] lg:snap-align-none">
+            <div className="testimonial bg-black-box min-w-full p-[30px] rounded-[10px] snap-center lg:min-w-[calc(50%-15px)] lg:snap-align-none">
               <div className="flex flex-col gap-[30px] sm:flex-row">
                 <div className='flex items-center text-left gap-[20px] flex-1'>
                   <div className="flex rounded-full overflow-hidden">
@@ -259,7 +289,7 @@ export default function About() {
               <p className='mt-[30px] text-[14px] leading-[24px] text-left'>Curabitur eleifend tempor gnceleris eget placeratvel phasellus eget sem just metup consequat gestas facilisis eleifend posure tempor metus sem just metup consequat gestas facilisis eleifend posures temporureture.</p>
             </div>
             {/* 6 */}
-            <div className="bg-black-box min-w-full p-[30px] rounded-[10px] snap-center lg:min-w-[calc(50%-15px)] lg:snap-align-none">
+            <div className="testimonial bg-black-box min-w-full p-[30px] rounded-[10px] snap-center lg:min-w-[calc(50%-15px)] lg:snap-align-none">
               <div className="flex flex-col gap-[30px] sm:flex-row">
                 <div className='flex items-center text-left gap-[20px] flex-1'>
                   <div className="flex rounded-full overflow-hidden">
